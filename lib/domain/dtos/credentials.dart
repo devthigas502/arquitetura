@@ -5,5 +5,5 @@ class Credentials {
   Credentials({
     this.email = "",
     this.password = ""
-  })
+  });
 }
