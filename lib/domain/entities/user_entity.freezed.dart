@@ -76,15 +76,20 @@ $UserEntityCopyWith(UserEntity _, $Res Function(UserEntity) __);
 @JsonSerializable()
 
 class _User implements UserEntity {
-  const _User({final  String? $type}): $type = $type ?? 'default';
+  const _User({required this.email, final  String? $type}): $type = $type ?? 'default';
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-
+ final  String email;
 
 @JsonKey(name: 'runtimeType')
 final String $type;
 
 
+/// Create a copy of UserEntity
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$UserCopyWith<_User> get copyWith => __$UserCopyWithImpl<_User>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
@@ -93,23 +98,52 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.email, email) || other.email == email));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,email);
 
 @override
 String toString() {
-  return 'UserEntity()';
+  return 'UserEntity(email: $email)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$UserCopyWith<$Res> implements $UserEntityCopyWith<$Res> {
+  factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
+@useResult
+$Res call({
+ String email
+});
 
 
+
+
+}
+/// @nodoc
+class __$UserCopyWithImpl<$Res>
+    implements _$UserCopyWith<$Res> {
+  __$UserCopyWithImpl(this._self, this._then);
+
+  final _User _self;
+  final $Res Function(_User) _then;
+
+/// Create a copy of UserEntity
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? email = null,}) {
+  return _then(_User(
+email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
 
 /// @nodoc
 @JsonSerializable()
@@ -190,21 +224,15 @@ as String,
 @JsonSerializable()
 
 class NotLoggedUser implements UserEntity {
-  const NotLoggedUser({required this.email, required this.token, final  String? $type}): $type = $type ?? 'notLogged';
+  const NotLoggedUser({final  String? $type}): $type = $type ?? 'notLogged';
   factory NotLoggedUser.fromJson(Map<String, dynamic> json) => _$NotLoggedUserFromJson(json);
 
- final  String email;
- final  String token;
+
 
 @JsonKey(name: 'runtimeType')
 final String $type;
 
 
-/// Create a copy of UserEntity
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$NotLoggedUserCopyWith<NotLoggedUser> get copyWith => _$NotLoggedUserCopyWithImpl<NotLoggedUser>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
@@ -213,52 +241,22 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotLoggedUser&&(identical(other.email, email) || other.email == email)&&(identical(other.token, token) || other.token == token));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotLoggedUser);
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,token);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'UserEntity.notLogged(email: $email, token: $token)';
+  return 'UserEntity.notLogged()';
 }
 
 
 }
 
-/// @nodoc
-abstract mixin class $NotLoggedUserCopyWith<$Res> implements $UserEntityCopyWith<$Res> {
-  factory $NotLoggedUserCopyWith(NotLoggedUser value, $Res Function(NotLoggedUser) _then) = _$NotLoggedUserCopyWithImpl;
-@useResult
-$Res call({
- String email, String token
-});
 
 
-
-
-}
-/// @nodoc
-class _$NotLoggedUserCopyWithImpl<$Res>
-    implements $NotLoggedUserCopyWith<$Res> {
-  _$NotLoggedUserCopyWithImpl(this._self, this._then);
-
-  final NotLoggedUser _self;
-  final $Res Function(NotLoggedUser) _then;
-
-/// Create a copy of UserEntity
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? email = null,Object? token = null,}) {
-  return _then(NotLoggedUser(
-email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,token: null == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-
-
-}
 
 // dart format on

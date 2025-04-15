@@ -6,17 +6,16 @@ part 'user_entity.g.dart';
 @freezed
 sealed class UserEntity with _$UserEntity {
 
-  const factory UserEntity() = _User;
+  const factory UserEntity({
+    required String email,
+  }) = _User;
 
   const factory UserEntity.logged({
     required String email,
     required String token,
   }) = LoggedUser;
 
-  const factory UserEntity.notLogged({
-    required String email,
-    required String token,
-  }) = NotLoggedUser;
+  const factory UserEntity.notLogged() = NotLoggedUser;
 
 
   factory UserEntity.fromJson(Map<String, dynamic> json) => _$UserEntityFromJson(json);
